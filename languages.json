@@ -1,0 +1,29 @@
+{
+    "catalan": {
+        "default_title": "Consum de combustible",
+        "total_distance": "Distància total",
+        "vehicle_consumption": "Consum de vehicle",
+        "price_per_liter": "Preu per litre",
+        "total_cost": "Cost total",
+        "people": "Persones",
+        "cost_per_person": "Cost per persona"
+    },
+    "french": {
+        "default_title": "Consommation de carburant",
+        "total_distance": "Distance totale",
+        "vehicle_consumption": "Consommation du véhicule",
+        "price_per_liter": "Prix par litre",
+        "total_cost": "Coût total",
+        "people": "Personnes",
+        "cost_per_person": "Coût par personne"
+    },
+    "english": {
+        "default_title": "Fuel Consumption",
+        "total_distance": "Total distance",
+        "vehicle_consumption": "Vehicle consumption",
+        "price_per_liter": "Price per liter",
+        "total_cost": "Total cost",
+        "people": "People",
+        "cost_per_person": "Cost per person"
+    }
+}
