@@ -1,3 +1,7 @@
+# Gas Price Calculator
+# Copyright (c) 2025 Gas Price Calculator Project
+# Licensed under CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/
+
 import json
 import os
 
