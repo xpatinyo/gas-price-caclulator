@@ -12,7 +12,7 @@ class GasCalculator:
         lenght_in_km: float,
         liters_per_100km: float,
         price_per_liter: float,
-        num_people: int,
+        num_people: int | None,
         language: str = "english",
     ):
         self.lenght_in_km = lenght_in_km
@@ -21,7 +21,7 @@ class GasCalculator:
         self.num_people = num_people
         self.language = language
         self.total_cost = self.calculate_total_cost()
-        self.cost_per_person = self.total_cost / self.num_people
+        self.cost_per_person = self.total_cost / self.num_people if self.num_people and self.num_people >= 2 else None
         self.translations = self._load_translations()
 
     def _load_translations(self) -> dict:
@@ -44,16 +44,28 @@ class GasCalculator:
 
         return total_cost
 
-    def pretty_print(self, language: str, title: str | None = None) -> str:
+    def generate_report(self, language: str, title: str | None = None) -> str:
         # Use provided title or default translation for the specified language
         display_title = title if title else self.get_translation(language, "default_title")
 
-        return (
-            f"=== {display_title} ===\n"
-            f"{self.get_translation(language, 'total_distance')}: {self.lenght_in_km} km\n"
-            f"{self.get_translation(language, 'vehicle_consumption')}: {self.liters_per_100km} L/100km\n"
-            f"{self.get_translation(language, 'price_per_liter')}: {self.price_per_liter} €\n"
-            f"{self.get_translation(language, 'total_cost')}: {self.total_cost:.2f} €\n"
-            f"{self.get_translation(language, 'people')}: {self.num_people}\n"
-            f"*{self.get_translation(language, 'cost_per_person')}: {self.cost_per_person:.2f} €*"
-        )
+        # Build basic report information
+        report_lines = [
+            f"*{display_title}*",
+            f"{self.get_translation(language, 'total_distance')}: {self.lenght_in_km} km",
+            f"{self.get_translation(language, 'vehicle_consumption')}: {self.liters_per_100km} L/100km",
+            f"{self.get_translation(language, 'price_per_liter')}: {self.price_per_liter} €",
+        ]
+
+        # Add people-specific information if applicable
+        if not self.num_people or self.num_people < 2:
+            report_lines.append(f"{self.get_translation(language, 'total_cost')}: *{self.total_cost:.2f} €*")
+        else:
+            report_lines.extend(
+                [
+                    f"{self.get_translation(language, 'people')}: {self.num_people}",
+                    f"{self.get_translation(language, 'total_cost')}: {self.total_cost:.2f} €",
+                    f"{self.get_translation(language, 'cost_per_person')}: *{self.cost_per_person:.2f} €*",
+                ]
+            )
+
+        return "\n".join(report_lines)
