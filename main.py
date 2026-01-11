@@ -21,4 +21,4 @@ calculator = GasCalculator(
 )
 
 # Print the results
-print(calculator.pretty_print("english", "Happy Road Trip!"))
+print(calculator.generate_report(language="english"))
